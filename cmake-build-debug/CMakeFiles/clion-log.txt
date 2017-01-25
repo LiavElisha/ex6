@@ -1,0 +1,16 @@
+/home/liav/Downloads/clion-2016.2.3/bin/cmake/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/liav/ClionProjects/ex6
+-- Boost version: 1.58.0
+-- Found the following Boost libraries:
+--   serialization
+--   system
+--   log
+--   log_setup
+--   date_time
+--   filesystem
+--   thread
+--   regex
+--   chrono
+--   atomic
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/liav/ClionProjects/ex6/cmake-build-debug
