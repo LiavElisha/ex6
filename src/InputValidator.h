@@ -18,6 +18,7 @@ private:
     vector<string> intermediateInputVec;
     vector<int> intermediateIntInput;
     vector <string> tripInformationInput;
+    vector<string> taxiInputVec;
 
 
 public:
@@ -30,9 +31,9 @@ public:
     int validateInputForObstacles();
     vector <int>*  validateInputForMatrix();
     void emptyTheMatrixVec();
-    vector <string>*  validateInputForTripInformation(int xDim, int yDim);
     int checkIfThereAreSpaces(string input);
-
+    vector <string>*  validateInputForTripInformation(int xDim, int yDim);
+    vector <string>*  validateInputForTaxi();
 
 };
 

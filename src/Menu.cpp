@@ -348,6 +348,12 @@ void Menu::getInput(){
 
 
             case 3: {// add Cab.
+
+                vector <string>* inputVec = inputValidator.validateInputForTaxi();
+                if(inputVec == 0){
+                    break;
+                }
+
                 string input;
                 string inputArr[10];
                 int id, taxiType;

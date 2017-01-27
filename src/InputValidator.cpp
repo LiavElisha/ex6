@@ -230,8 +230,6 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
         emptyIntermediateVec();
         emptyTheTripVec();
     }
-
-    int isValid = 0;
     string input;
     int min;
     int max;
@@ -286,3 +284,64 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
     return &tripInformationInput;
 }
 
+
+vector <string>*  InputValidator::validateInputForTaxi(){
+
+    if(!intermediateInputVec.empty()){
+        emptyIntermediateVec();
+        emptyTheTripVec();
+    }
+    string taxiInput;
+    int min;
+    int max;
+    std::cin.clear(); // clears error flags
+    std::getline(std::cin, taxiInput);
+    int therAreSpaces = checkIfThereAreSpaces(taxiInput);
+    if(therAreSpaces == -1){
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return 0;
+    }
+    emptyIntermediateVec();
+    parseInputByDelimiter(taxiInput, ',');
+    if(intermediateInputVec.size()!=4){
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return 0;
+    }
+    for(int i=0;i<2;i++){
+        if( i == 0){
+
+            min =0;
+            max = -1;
+        }else {
+            min =1;
+            max =2;
+        }
+        int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
+        if(num == -1){
+            std::cout << "-1" << endl;
+            emptyIntermediateVec();
+            return 0;
+
+        }
+    }
+    string man = intermediateInputVec[2];
+    string color = intermediateInputVec[3];
+    if(!(!man.compare("H") || !man.compare("S") || !man.compare("T") || !man.compare("F"))){
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return 0;
+    }
+    if(!(!color.compare("R") || !color.compare("B") || !color.compare("G") || !color.compare("P")
+                                                                        || !color.compare("W"))) {
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return 0;
+    }
+    for(int i=0;i<4;i++){
+        taxiInputVec.push_back(intermediateInputVec[i]);
+    }
+    emptyIntermediateVec();
+    return &taxiInputVec;
+}
