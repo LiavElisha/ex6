@@ -50,3 +50,11 @@ AbstractNode* Matrix::getNode(AbstractNode* node){
             }
         }
 }
+
+int Matrix::getXsize(){
+    return x;
+}
+
+int Matrix::getYsize(){
+    return y;
+}

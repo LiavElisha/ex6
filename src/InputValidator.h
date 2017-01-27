@@ -10,28 +10,28 @@
 #include <cstring>
 #include <sstream>
 using namespace std;
-#define matrixDimensionsSize  2;
 
 
 class InputValidator {
 private:
     vector<int> matrixInput;
-    int matrixDimensions [2];
-    vector<string> obstaclesVec;
     vector<string> intermediateInputVec;
     vector<int> intermediateIntInput;
+    vector <string> tripInformationInput;
 
 
 public:
     int checkIfIsAvalidNumber(string input,int min, int max);
     void parseInputByDelimiter(string input, char delimiter);
     void emptyIntermediateVec();
+    void emptyTheTripVec();
     InputValidator();
-    int getAPositiveNumber();
     void validateDimenstionOfMatrix();
     int validateInputForObstacles();
     vector <int>*  validateInputForMatrix();
     void emptyTheMatrixVec();
+    vector <string>*  validateInputForTripInformation(int xDim, int yDim);
+    int checkIfThereAreSpaces(string input);
 
 
 };

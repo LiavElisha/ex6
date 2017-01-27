@@ -22,6 +22,9 @@ private:
 public:
     // constructor
     Matrix(int xSize, int ySize);
+    int getXsize();
+    int getYsize();
+
     // destructor
     ~Matrix();
     // implementation of virtual function

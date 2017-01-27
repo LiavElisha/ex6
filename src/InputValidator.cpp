@@ -12,11 +12,9 @@ InputValidator::InputValidator(){
 
 
 /*
- * the method validates through the functionality of the cin that the dimension of the matrix are ok.
+ * the method gets a string and a delimiter ands splits it into token where each token is pushed to a vector
+ * of strings.
  */
-
-
-
 void InputValidator::parseInputByDelimiter(string input, char delimiter){
     string token;
     istringstream iss(input);
@@ -26,25 +24,14 @@ void InputValidator::parseInputByDelimiter(string input, char delimiter){
 }
 
 
-int InputValidator::getAPositiveNumber() {
-    int number;
-    std::cin >> number;//get the input.
-    if (std::cin.fail()) {
-        std::cin.clear(); // clears error flags
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');//clear everything until the \n.
-        std::cout << "-1" << endl;
-        return -1;
-    } else {
-        if (number <= 0 || number>1000) {
-            std::cout << "-1" << endl;
-            return -1;
-        } else {
-            return number;
-        }
-    }
-}
 
-
+/*
+ * the method gets a string and a range which the string should be between.
+ * first it checks if all of its components are digits and then it checks if the number is in the range given if
+ * one is given.
+ * if it isn't it returns -1 otherwise it returns the num.
+ *
+ */
 int InputValidator::checkIfIsAvalidNumber(string input,int min, int max){
     unsigned long length = input.size();
     int tempNum= 0;
@@ -56,11 +43,27 @@ int InputValidator::checkIfIsAvalidNumber(string input,int min, int max){
         }
     }
 
-    if(tempNum> max || tempNum<min){
-        return -1;
+    if(min!=-1){
+        if (tempNum < min) {
+            return -1;
+        }
+    }
+    if(max!= -1){
+        if (tempNum > max) {
+            return -1;
+        }
     }
     return tempNum;
 }
+
+/*
+ *
+ */
+
+/*
+ * the method empties the vectors of string in case that the input was incorrect
+ * and new input should be insrted.
+ */
 void InputValidator::emptyIntermediateVec(){
     while(!intermediateInputVec.empty()){
         intermediateInputVec.pop_back();
@@ -70,7 +73,11 @@ void InputValidator::emptyIntermediateVec(){
     }
 }
 
-
+/*
+ * the method other method for splitting the input into tokens then it checks if each
+ * parameter given is a number and then if it is then it inserts them into a vector of strings.
+ * otherwise it receives a new input until it is correct.
+ */
 void InputValidator::validateDimenstionOfMatrix(){
     int isValid = 0;
     string dimensions;
@@ -79,7 +86,7 @@ void InputValidator::validateDimenstionOfMatrix(){
         std::cin.clear(); // clears error flags
         std::getline(std::cin, dimensions);
         parseInputByDelimiter(dimensions, ' ');
-        if(intermediateInputVec.size()==2) {
+        if(intermediateInputVec.size() == 2) {
             for (int i = 0; i < 2; i++) {
                 validNum = checkIfIsAvalidNumber(intermediateInputVec[i], 1, 1000);
                 if (validNum == -1) {
@@ -107,22 +114,35 @@ void InputValidator::validateDimenstionOfMatrix(){
 
 
 
+int InputValidator::checkIfThereAreSpaces(string input){
+    parseInputByDelimiter(input,' ');
+    if(intermediateInputVec.size()!=1) {
+        std::cout << "-1" << endl;
+        return -1;
+    }
+    else return 0;
+}
 
+
+
+/*
+ * the method verifies the the input was given as obstacles is valid it returns -1 if it isn't and 0 otherwise.
+ * first it uses other methods to split the input into tokens by comma, then it checks if each component
+ * is a number and if so that it is in the range of the matrix. if so it pushes the input into the input
+ * vector.
+ */
 int InputValidator::validateInputForObstacles() {
-    string obstacle;
-    string token;
-    string  numberOfObstacles;
-    int amountOfObstacles;
-    int isValid = 0;
-    int validNum;
+        int zeroFlag=0;
+        string obstacle;
+        string  numberOfObstacles;
+        int amountOfObstacles;
         std::cin.clear(); // clears error flags
         std::getline(std::cin, numberOfObstacles);
-        parseInputByDelimiter(numberOfObstacles,' ');
-        if(intermediateInputVec.size()!=1) {
-            std::cout << "-1" << endl;
+        int thereAreSpaces = checkIfThereAreSpaces(numberOfObstacles);
+        if(thereAreSpaces == -1){
             return -1;
         }
-    amountOfObstacles = checkIfIsAvalidNumber(numberOfObstacles,0,matrixInput[0]*matrixInput[1]);
+        amountOfObstacles = checkIfIsAvalidNumber(numberOfObstacles,0,matrixInput[0]*matrixInput[1]);
         if(amountOfObstacles == -1) {
             std::cout << "-1" << endl;
             return -1;
@@ -144,10 +164,11 @@ int InputValidator::validateInputForObstacles() {
                 std::cout << "-1" << endl;
                 return -1;
             } else {
-                int xVal = checkIfIsAvalidNumber(intermediateInputVec[0],1,matrixInput[1]);
-                int yVal = checkIfIsAvalidNumber(intermediateInputVec[1],1,matrixInput[0]);
-                if (xVal == -1 || yVal == -1) {
-                   return -1;
+                int xVal = checkIfIsAvalidNumber(intermediateInputVec[0],0,matrixInput[1]-1);
+                int yVal = checkIfIsAvalidNumber(intermediateInputVec[1],0,matrixInput[0]-1);
+                if ((xVal == -1 || yVal == -1)|| (xVal ==0 && yVal == 0)) {
+                    std::cout << "-1" << endl;
+                    return -1;
                 }else {
                     matrixInput.push_back(xVal);
                     matrixInput.push_back(yVal);
@@ -168,6 +189,23 @@ void InputValidator::emptyTheMatrixVec() {
     }
 }
 
+
+
+void InputValidator::emptyTheTripVec() {
+    while(!tripInformationInput.empty()){
+        tripInformationInput.pop_back();
+    }
+}
+
+
+
+/*
+ * the method verifies that the input given as matrix is valid, first it checks if the matrix dimension
+ * are correct or not and then if the obstacles give.
+ * if not it keeps getting input until it receives a valid input and if it is correct it returns
+ * a vector of ints where the first parameter is the x dimension of the matrix, the second is the y dimension
+ * the third is the number of obstacles and then each pair is an obstacle.
+ */
 vector<int>*  InputValidator::validateInputForMatrix(){
     int validateObs=0;
     int isValid=0;
@@ -181,5 +219,70 @@ vector<int>*  InputValidator::validateInputForMatrix(){
             return &matrixInput;
         }
     }
-
 }
+
+
+
+
+
+vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int yDim) {
+    if(!intermediateInputVec.empty()){
+        emptyIntermediateVec();
+        emptyTheTripVec();
+    }
+
+    int isValid = 0;
+    string input;
+    int min;
+    int max;
+    std::cin.clear(); // clears error flags
+    std::getline(std::cin, input);
+    int therAreSpaces = checkIfThereAreSpaces(input);
+    if(therAreSpaces == -1){
+        emptyIntermediateVec();
+        return 0;
+    }
+    emptyIntermediateVec();
+    parseInputByDelimiter(input, ',');
+    if (intermediateInputVec.size() != 8) {
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return 0;
+    }
+    for (int i = 0; i < 8; i++) {
+        if (i > 0 && i < 5) {// the points should be in the range of the matrix.
+            if (i % 2 == 0) {
+                min = 0;
+                max = xDim - 1;
+            } else {
+                min = 0;
+                max = yDim - 1;
+            }
+        }else if (i == 0) {  // the id should be bigger the 0.
+            min = 0;
+            max = -1;
+        } else {//the tariff, the passanger amount and the time should all be bigger than 1.
+            min = 1;
+            max = -1;
+        }
+        int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
+        if (num == -1) {
+            emptyIntermediateVec();
+            std::cout << "-1" << endl;
+            return 0;
+        }
+    }
+
+    if(atoi(intermediateInputVec[1].c_str()) == atoi(intermediateInputVec[3].c_str()) &&
+            (atoi(intermediateInputVec[2].c_str()) == atoi(intermediateInputVec[4].c_str()))){
+        emptyIntermediateVec();
+        std::cout << "-1" << endl;
+        return 0;
+    }
+    for(int i=0;i<8;i++){
+        tripInformationInput.push_back(intermediateInputVec[i]);
+    }
+    emptyIntermediateVec();
+    return &tripInformationInput;
+}
+

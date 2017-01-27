@@ -29,9 +29,6 @@ private:
     Socket* socket;
     map<int, int> threds; // map every driver id to index
     Communication* communication; // to communucate between the class
-
-
-
     InputValidator inputValidator;
     string  input[];
     vector<string>inputStgringVec;
@@ -56,8 +53,8 @@ public:
                     double tariff, int timeOfStart);
     void sendProperTaxi(int cabId);
     int receiveNewDriver();
-    void initializeObstacles();
-    void initializeMatrix();
+    void initializeObstacles(vector<int>* input);
+    void initializeMatrix(vector<int>* input);
     static void* threadFunction(void* data1);
     ~Menu();
 

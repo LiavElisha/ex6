@@ -59,25 +59,24 @@ Menu::Menu(TaxiCenter*& t,Socket* socket1) {
  * the method gets the amount of obstacles wanted and the x and y coordinate and initializes
  * them as obstacles on the matrix.
  */
-void Menu::initializeObstacles(){
-    int numberOfObstacles;
-    cin>>numberOfObstacles;//gets the amount of obstacles.
-    while (numberOfObstacles){//get each obstacle.
-        int xObstacle, yObstacle;
-        char dummy;
-        cin>>xObstacle>>dummy>>yObstacle;
-        NodePoint point(xObstacle,yObstacle);//get the proper node from the matrix.
-        matrix->getNode((&point))->setIsObstacle();
-        numberOfObstacles--;
-    }
+void Menu::initializeObstacles(vector<int>* input){
+    int offset= 0;
+    int numberOfObstacles = (*input)[2];
+   for(int i=0;i<numberOfObstacles;i++){
+       int xObstacle = (*input)[i+3+offset];
+       int yObstacle = (*input)[i+4+offset];
+       NodePoint point(xObstacle,yObstacle);//get the proper node from the matrix.
+       matrix->getNode((&point))->setIsObstacle();
+       offset++;
+   }
 }
 /*
  * the method initializes the matrix according to the size wanted and received by the console.
  */
 
-void Menu::initializeMatrix() {
-    int x,y;
-    cin>>x>>y;// gets the size of the matrix.
+void Menu::initializeMatrix(vector<int>* input) {
+    int x = (*input)[0];
+    int y = (*input)[1];
     matrix = new Matrix(x,y);//create the proper matrix with the right measurments.
 }
 
@@ -299,14 +298,17 @@ void Menu::assignTrips(){
  * then it activates the moving method of each object according to the input.
  */
 void Menu::getInput(){
-     vector<int>* d =  this->inputValidator.validateInputForMatrix();
-    initializeMatrix();// initialize the matrix.
-    initializeObstacles();// initialize the obstacles.
+     vector<int>* input =  this->inputValidator.validateInputForMatrix();
+    initializeMatrix(input);// initialize the matrix.
+    initializeObstacles(input);// initialize the obstacles.
     int choice = 0;
-
+    string choice1;
     // {// the loop is active until the user hits the 7 key.
       do {
-        cin>>choice;//gets the choice from the user.
+          std::cin.clear(); // clears error flags
+          std::getline(std::cin, choice1);//gets the choice from the user.
+          choice=atoi(choice1.c_str());
+
         switch (choice) {
             case 1: {// add Driver.
                 int amountOfDrivers;
@@ -328,20 +330,18 @@ void Menu::getInput(){
                 }
 
             case 2: {// add trip.
-                string input;
-                string inputArr[10];
-                int id, startX, startY, endX, endY, numOfPassangers,timeOfStart;
-                double tariff;
-                cin >> input;
-                parseInput(input, inputArr);
-                id = atoi(inputArr[0].c_str());
-                startX = atoi(inputArr[1].c_str());
-                startY = atoi(inputArr[2].c_str());
-                endX = atoi(inputArr[3].c_str());
-                endY = atoi(inputArr[4].c_str());
-                numOfPassangers = atoi(inputArr[5].c_str());
-                tariff = atof(inputArr[6].c_str());
-                timeOfStart =atoi(inputArr[7].c_str());
+                vector <string>* inputVec = inputValidator.validateInputForTripInformation(matrix->getXsize(),matrix->getYsize());
+                if(inputVec == 0){
+                    break;
+                }
+                int id = atoi((*inputVec)[0].c_str());
+                int startX = atoi((*inputVec)[1].c_str());
+                int startY = atoi((*inputVec)[2].c_str());
+                int endX = atoi((*inputVec)[3].c_str());
+                int endY = atoi((*inputVec)[4].c_str());
+                int numOfPassangers = atoi((*inputVec)[5].c_str());
+                int tariff = atoi((*inputVec)[6].c_str());
+                int timeOfStart = atoi((*inputVec)[7].c_str());
                 getNewTrip( id, startX, startY, endX ,endY,  numOfPassangers, tariff, timeOfStart);
                 break;
             }
