@@ -24,7 +24,6 @@ private:
     //members.
 map<int,Driver*> driversMap;//done.
 vector<TripInformation*> tripDeque;//done.
-  //  map<int, AbstractCab*> cabsMap;
     vector<AbstractCab*> cabVector;
     int clock;
     Bfs* navigator;

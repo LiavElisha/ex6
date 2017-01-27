@@ -7,8 +7,11 @@
 
 #include <vector>
 #include "iostream"
+#include "Driver.h"
 #include <cstring>
 #include <sstream>
+#include <map>
+
 using namespace std;
 
 
@@ -34,6 +37,7 @@ public:
     int checkIfThereAreSpaces(string input);
     vector <string>*  validateInputForTripInformation(int xDim, int yDim);
     vector <string>*  validateInputForTaxi();
+    int validateInputForDriversLocation(map<int,Driver*> driversMap);
 
 };
 

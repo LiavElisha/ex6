@@ -364,12 +364,11 @@ void Menu::getInput(){
 
 
             case 4: {// get the location of a certain driver.
-                string input;
-                string inputArr[10];
-                int id;
-                cin >> input;
-                parseInput(input, inputArr);
-                id = atoi(inputArr[0].c_str());
+
+                int id = inputValidator.validateInputForDriversLocation(taxiCenter->getDriversMap());
+                if(id == -1){
+                    break;
+                }
                 NodePoint *location = (NodePoint *)taxiCenter->getDriverLocation(id);
                 cout << *location ;
                 break;
