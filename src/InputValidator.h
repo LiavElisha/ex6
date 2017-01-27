@@ -22,7 +22,7 @@ private:
     vector<int> intermediateIntInput;
     vector <string> tripInformationInput;
     vector<string> taxiInputVec;
-
+    vector<string>driverInputVec;
 
 public:
     int checkIfIsAvalidNumber(string input,int min, int max);
@@ -38,7 +38,7 @@ public:
     vector <string>*  validateInputForTripInformation(int xDim, int yDim);
     vector <string>*  validateInputForTaxi();
     int validateInputForDriversLocation(map<int,Driver*> driversMap);
-
+    vector <string>*  validateInputForNewDriver();
 };
 
 

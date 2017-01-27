@@ -381,3 +381,53 @@ int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap)
     }
     return driverId;///else return the driver id.
 }
+
+vector <string>*  InputValidator::validateInputForNewDriver(){
+    if(!intermediateInputVec.empty()) {
+        emptyIntermediateVec();
+    }
+    int min;
+    int max;
+    string input;
+    std::cin.clear(); // clears error flags
+    std::getline(std::cin, input);
+    int thereAreSpaces = checkIfThereAreSpaces(input);/// validate that we have no spaces in the input.
+    if(thereAreSpaces == -1){
+        emptyIntermediateVec();
+        return 0;
+    }
+    emptyIntermediateVec();
+    parseInputByDelimiter(input, ',');
+    if(intermediateInputVec.size()!=5){
+        emptyIntermediateVec();
+        return 0;
+    }
+    for(int i=0;i<5;i++){
+        if(i!=2) {
+            if (i == 0 || i==4) {
+                min = 0;
+                max = -1;
+            } else {
+                min = 1;
+                max = -1;
+            }
+            int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
+            if (num == -1) {
+                std::cout << "-1" << endl;
+                emptyIntermediateVec();
+                return 0;
+            }
+        } else {
+            string status = intermediateInputVec[2];
+            if(!(!status.compare("S") || !status.compare("M") || !status.compare("D") || !status.compare("W"))){
+                emptyIntermediateVec();
+                return 0;
+            }
+        }
+    }
+    for(int i=0;i<5;i++){
+        driverInputVec.push_back(intermediateInputVec[i]);
+    }
+    emptyIntermediateVec();
+    return &driverInputVec;
+}

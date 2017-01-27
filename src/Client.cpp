@@ -12,28 +12,41 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/serialization/export.hpp>
 #include "Socket.h"
-#include "Udp.h"
 #include "Driver.h"
 #include "StandardCab.h"
 #include "LuxuryCab.h"
 #include "TaxiCenter.h"
 #include "Tcp.h"
+#include "InputValidator.h"
+#include <vector>
+
 using namespace std;
 using namespace boost::archive;
 
 int main(int argc, char *argv[]){
-
+    InputValidator inputValidator;
     int portNumber = atoi(argv[2]); // getting the port number from the arguments of the main.
-    Socket* socket = new Tcp(0,portNumber);//creating a new socket -udp.
+    Socket* socket = new Tcp(0,portNumber);//creating a new socket -tcp.
+    vector <string>* driverInput = inputValidator.validateInputForNewDriver();
+     if(driverInput == 0){
+         delete(socket);
+         return 0;
+     }
+
     socket->initialize();   //initialize the socket.
     char buffer[130000];  // define a buffer for the serialization.
     memset(buffer,0,130000);
     AbstractCab* mycab;
-
     int id,age,experience,vehicleId;// recieving a driver.
-    char status, dummy;
-    cin>>id>>dummy>>age>>dummy>>status>>dummy>>experience>>dummy>>vehicleId;
-    Driver* driver = new Driver(id,age,status,vehicleId,experience);    //receive new driver.
+    string status;
+
+    id = atoi((*driverInput)[0].c_str());
+    age = atoi((*driverInput)[1].c_str());
+    status = (*driverInput)[2];
+    experience =atoi((*driverInput)[3].c_str());
+    vehicleId = atoi((*driverInput)[4].c_str());
+    Driver* driver = new Driver(id,age,*status.c_str(),vehicleId,experience);    //receive new driver.
+
 
     //serialized the driver.
     string serializedDriver ;
