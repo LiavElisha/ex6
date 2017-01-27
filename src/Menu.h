@@ -10,6 +10,7 @@
 #include "Matrix.h"
 #include "Socket.h"
 #include "Communication.h"
+#include "InputValidator.h"
 
 
 /*
@@ -27,8 +28,17 @@ private:
     Matrix* matrix;
     Socket* socket;
     map<int, int> threds; // map every driver id to index
-
     Communication* communication; // to communucate between the class
+
+
+
+    InputValidator inputValidator;
+    string  input[];
+    vector<string>inputStgringVec;
+    vector<int> inputIntVec;
+
+
+
 public:
     Menu(TaxiCenter*& t, Socket* socket1);
     void getInput();

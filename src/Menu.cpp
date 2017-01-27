@@ -28,6 +28,7 @@
 #include "LuxuryCab.h"
 #include "TaxiCenter.h"
 #include "Data.h"
+#include "InputValidator.h"
 
 pthread_mutex_t locker = PTHREAD_MUTEX_INITIALIZER;
 /*
@@ -298,6 +299,7 @@ void Menu::assignTrips(){
  * then it activates the moving method of each object according to the input.
  */
 void Menu::getInput(){
+     vector<int>* d =  this->inputValidator.validateInputForMatrix();
     initializeMatrix();// initialize the matrix.
     initializeObstacles();// initialize the obstacles.
     int choice = 0;
