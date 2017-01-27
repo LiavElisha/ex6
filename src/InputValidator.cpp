@@ -112,7 +112,11 @@ void InputValidator::validateDimenstionOfMatrix(){
 }
 
 
-
+/*
+ *  the method gets a string and parses it by the delimiter "space" =' ' and pushes it into a vector,
+ *  if it has spaces that means that there are more than one element in the vector then it returns -1.
+ *  else it returns 0.
+ */
 
 int InputValidator::checkIfThereAreSpaces(string input){
     parseInputByDelimiter(input,' ');
@@ -190,7 +194,9 @@ void InputValidator::emptyTheMatrixVec() {
 }
 
 
-
+/*
+ * the method empties the vector.
+ */
 void InputValidator::emptyTheTripVec() {
     while(!tripInformationInput.empty()){
         tripInformationInput.pop_back();
@@ -220,10 +226,6 @@ vector<int>*  InputValidator::validateInputForMatrix(){
         }
     }
 }
-
-
-
-
 
 vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int yDim) {
     if(!intermediateInputVec.empty()){
@@ -298,7 +300,6 @@ vector <string>*  InputValidator::validateInputForTaxi(){
     std::getline(std::cin, taxiInput);
     int therAreSpaces = checkIfThereAreSpaces(taxiInput);
     if(therAreSpaces == -1){
-        std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
@@ -323,7 +324,6 @@ vector <string>*  InputValidator::validateInputForTaxi(){
             std::cout << "-1" << endl;
             emptyIntermediateVec();
             return 0;
-
         }
     }
     string man = intermediateInputVec[2];

@@ -348,22 +348,16 @@ void Menu::getInput(){
 
 
             case 3: {// add Cab.
-
                 vector <string>* inputVec = inputValidator.validateInputForTaxi();
                 if(inputVec == 0){
                     break;
                 }
-
-                string input;
-                string inputArr[10];
                 int id, taxiType;
                 string carMan, color;
-                cin >> input;
-                parseInput(input, inputArr);
-                id = atoi(inputArr[0].c_str());
-                taxiType = atoi(inputArr[1].c_str());
-                carMan = inputArr[2];
-                color = inputArr[3];
+                id = atoi((*inputVec)[0].c_str());
+                taxiType = atoi((*inputVec)[1].c_str());
+                carMan = (*inputVec)[2];
+                color = (*inputVec)[3];
                 getNewCab(id,taxiType, 0, *carMan.c_str(), *color.c_str());
                 break;
             }
