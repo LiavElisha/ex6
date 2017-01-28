@@ -167,9 +167,22 @@ CMakeFiles/server.dir/src/Tcp.cpp.o: ../src/Socket.h
 CMakeFiles/server.dir/src/Tcp.cpp.o: ../src/Tcp.cpp
 CMakeFiles/server.dir/src/Tcp.cpp.o: ../src/Tcp.h
 
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/AbstractCab.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/AbstractNode.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Bfs.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Communication.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Data.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Driver.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Grid.h
 CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Job.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Matrix.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/NodePoint.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Point.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/Socket.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/TaxiCenter.h
 CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/ThreadPool.cpp
 CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/ThreadPool.h
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/TripInformation.h
 
 CMakeFiles/server.dir/src/TripInformation.cpp.o: ../src/AbstractNode.h
 CMakeFiles/server.dir/src/TripInformation.cpp.o: ../src/Bfs.h

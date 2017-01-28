@@ -3,6 +3,7 @@
 //
 
 #include "ThreadPool.h"
+#include "Data.h"
 #include <unistd.h>
 #include <iostream>
 
@@ -24,6 +25,7 @@ ThreadPool::ThreadPool(int threads_num1){
     threads = new pthread_t[threads_num];
 
     pthread_mutex_init(&lock, NULL);
+    pthread_mutex_init(&lock2, NULL);
     for (int i = 0; i < threads_num; i++) {
         pthread_create(threads + i, NULL, startJobs, this);
     }
@@ -44,6 +46,9 @@ void ThreadPool::doJobs() {
             sleep(1);
         }
     }
+    pthread_mutex_lock(&lock2);
+    ++howManyFinish;
+    pthread_mutex_unlock(&lock2);
     pthread_exit(NULL);
 }
 
@@ -57,8 +62,20 @@ void ThreadPool::terminate() {
     stop = true;
 }
 
+int ThreadPool::gethowManyFinish(){
+    return howManyFinish;
+}
+
 ThreadPool::~ThreadPool() {
-    // TODO Auto-generated destructor stub
+    // delete all jobs that created and their args(data)
+    while(!jobs_queue.empty()){
+        Job* job = jobs_queue.front();
+        jobs_queue.pop();
+        Data* data =(Data*) job->getArgs();
+        delete data;
+        delete job;
+    }
     delete[] threads;
     pthread_mutex_destroy(&lock);
+    pthread_mutex_destroy(&lock2);
 }

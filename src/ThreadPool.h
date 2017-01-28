@@ -18,11 +18,14 @@ private:
     pthread_t* threads;
     bool stop;
     pthread_mutex_t lock;
+    pthread_mutex_t lock2;
+    int howManyFinish;
 public:
     ThreadPool(int threads_num1);
     void doJobs();
     void addJob(Job *job);
     void terminate();
+    int gethowManyFinish();
     virtual ~ThreadPool();
 };
 

@@ -12,6 +12,7 @@ private:
     void * (*func)(void *arg);
 public:
     Job(void * (*func)(void *arg), void* arg);
+    void* getArgs();
     void execute();
     virtual ~Job();
 };

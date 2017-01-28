@@ -641,6 +641,8 @@ Socket.h
 /home/liav/ClionProjects/ex6/src/ThreadPool.cpp
 ThreadPool.h
 /home/liav/ClionProjects/ex6/src/ThreadPool.h
+Data.h
+/home/liav/ClionProjects/ex6/src/Data.h
 unistd.h
 -
 iostream
