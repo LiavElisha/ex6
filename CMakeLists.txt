@@ -29,10 +29,12 @@ set(SOURCE_FILES src/main.cpp src/Point.cpp src/Point.h  src/AbstractNode.cpp
         src/TripInformation.cpp src/TripInformation.h
         src/TripInformation.h
         src/Menu.cpp src/Menu.h src/Data.cpp  src/Data.h src/Tcp.cpp src/Tcp.h
-        src/Communication.cpp src/Communication.h src/InputValidator.cpp src/InputValidator.h)
+        src/Communication.cpp src/Communication.h src/InputValidator.cpp src/InputValidator.h
+        src/Job.cpp src/Job.h src/ThreadPool.cpp src/ThreadPool.h)
+
 #add_executable(ex6 ${SOURCE_FILES})
 add_executable(server src/Server.cpp ${SOURCE_FILES})
-add_executable(client src/Client.cpp ${SOURCE_FILES} src/Tcp.cpp src/Tcp.h src/Data.cpp src/Data.h src/Communication.cpp src/Communication.h )
+add_executable(client src/Client.cpp ${SOURCE_FILES} src/Tcp.cpp src/Tcp.h src/Data.cpp src/Data.h src/Communication.cpp src/Communication.h src/Job.cpp src/Job.h src/ThreadPool.cpp src/ThreadPool.h)
 
 
 target_link_libraries(server ${Boost_LIBRARIES})

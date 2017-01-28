@@ -469,6 +469,66 @@ src/Grid.cpp.s:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Grid.cpp.s
 .PHONY : src/Grid.cpp.s
 
+src/InputValidator.o: src/InputValidator.cpp.o
+
+.PHONY : src/InputValidator.o
+
+# target to build an object file
+src/InputValidator.cpp.o:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/InputValidator.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/InputValidator.cpp.o
+.PHONY : src/InputValidator.cpp.o
+
+src/InputValidator.i: src/InputValidator.cpp.i
+
+.PHONY : src/InputValidator.i
+
+# target to preprocess a source file
+src/InputValidator.cpp.i:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/InputValidator.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/InputValidator.cpp.i
+.PHONY : src/InputValidator.cpp.i
+
+src/InputValidator.s: src/InputValidator.cpp.s
+
+.PHONY : src/InputValidator.s
+
+# target to generate assembly for a file
+src/InputValidator.cpp.s:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/InputValidator.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/InputValidator.cpp.s
+.PHONY : src/InputValidator.cpp.s
+
+src/Job.o: src/Job.cpp.o
+
+.PHONY : src/Job.o
+
+# target to build an object file
+src/Job.cpp.o:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/Job.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Job.cpp.o
+.PHONY : src/Job.cpp.o
+
+src/Job.i: src/Job.cpp.i
+
+.PHONY : src/Job.i
+
+# target to preprocess a source file
+src/Job.cpp.i:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/Job.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Job.cpp.i
+.PHONY : src/Job.cpp.i
+
+src/Job.s: src/Job.cpp.s
+
+.PHONY : src/Job.s
+
+# target to generate assembly for a file
+src/Job.cpp.s:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/Job.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Job.cpp.s
+.PHONY : src/Job.cpp.s
+
 src/LuxuryCab.o: src/LuxuryCab.cpp.o
 
 .PHONY : src/LuxuryCab.o
@@ -796,6 +856,36 @@ src/Tcp.cpp.s:
 	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Tcp.cpp.s
 .PHONY : src/Tcp.cpp.s
 
+src/ThreadPool.o: src/ThreadPool.cpp.o
+
+.PHONY : src/ThreadPool.o
+
+# target to build an object file
+src/ThreadPool.cpp.o:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ThreadPool.cpp.o
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ThreadPool.cpp.o
+.PHONY : src/ThreadPool.cpp.o
+
+src/ThreadPool.i: src/ThreadPool.cpp.i
+
+.PHONY : src/ThreadPool.i
+
+# target to preprocess a source file
+src/ThreadPool.cpp.i:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ThreadPool.cpp.i
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ThreadPool.cpp.i
+.PHONY : src/ThreadPool.cpp.i
+
+src/ThreadPool.s: src/ThreadPool.cpp.s
+
+.PHONY : src/ThreadPool.s
+
+# target to generate assembly for a file
+src/ThreadPool.cpp.s:
+	$(MAKE) -f CMakeFiles/client.dir/build.make CMakeFiles/client.dir/src/ThreadPool.cpp.s
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ThreadPool.cpp.s
+.PHONY : src/ThreadPool.cpp.s
+
 src/TripInformation.o: src/TripInformation.cpp.o
 
 .PHONY : src/TripInformation.o
@@ -928,6 +1018,12 @@ help:
 	@echo "... src/Grid.o"
 	@echo "... src/Grid.i"
 	@echo "... src/Grid.s"
+	@echo "... src/InputValidator.o"
+	@echo "... src/InputValidator.i"
+	@echo "... src/InputValidator.s"
+	@echo "... src/Job.o"
+	@echo "... src/Job.i"
+	@echo "... src/Job.s"
 	@echo "... src/LuxuryCab.o"
 	@echo "... src/LuxuryCab.i"
 	@echo "... src/LuxuryCab.s"
@@ -961,6 +1057,9 @@ help:
 	@echo "... src/Tcp.o"
 	@echo "... src/Tcp.i"
 	@echo "... src/Tcp.s"
+	@echo "... src/ThreadPool.o"
+	@echo "... src/ThreadPool.i"
+	@echo "... src/ThreadPool.s"
 	@echo "... src/TripInformation.o"
 	@echo "... src/TripInformation.i"
 	@echo "... src/TripInformation.s"

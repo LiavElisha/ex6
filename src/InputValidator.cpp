@@ -202,6 +202,13 @@ void InputValidator::emptyTheTripVec() {
     }
 }
 
+void InputValidator::emptyTaxiInputVec() {
+    while(!taxiInputVec.empty()){
+        taxiInputVec.pop_back();
+    }
+}
+
+
 
 
 /*

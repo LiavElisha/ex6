@@ -11,6 +11,8 @@
 #include "Socket.h"
 #include "Communication.h"
 #include "InputValidator.h"
+#include "ThreadPool.h"
+#include "Job.h"
 
 
 /*
@@ -33,6 +35,7 @@ private:
     string  input[];
     vector<string>inputStgringVec;
     vector<int> inputIntVec;
+    ThreadPool* threadPool;
 
 
 

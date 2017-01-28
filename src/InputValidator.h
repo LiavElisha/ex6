@@ -29,6 +29,7 @@ public:
     void parseInputByDelimiter(string input, char delimiter);
     void emptyIntermediateVec();
     void emptyTheTripVec();
+    void emptyTaxiInputVec();
     InputValidator();
     void validateDimenstionOfMatrix();
     int validateInputForObstacles();

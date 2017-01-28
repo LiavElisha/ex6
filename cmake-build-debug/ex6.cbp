@@ -464,6 +464,22 @@
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/InputValidator.cpp">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/InputValidator.h">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/Job.cpp">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/Job.h">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/home/liav/ClionProjects/ex6/src/LuxuryCab.cpp">
 			<Option target="client"/>
 			<Option target="server"/>
@@ -544,6 +560,14 @@
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/home/liav/ClionProjects/ex6/src/Tcp.h">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/ThreadPool.cpp">
+			<Option target="client"/>
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/home/liav/ClionProjects/ex6/src/ThreadPool.h">
 			<Option target="client"/>
 			<Option target="server"/>
 		</Unit>

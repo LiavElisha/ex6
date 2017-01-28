@@ -49,6 +49,13 @@ std::deque<AbstractNode*> Bfs::theShortestWay(AbstractNode* start,
         }
     }
 
+    // if the last point is not the destination return empty deque
+    if (node != end){
+        return finalRoute;
+    }
+
+
+
     // add to the stack the Nodes in order
     while (true){
         stack.push(node);

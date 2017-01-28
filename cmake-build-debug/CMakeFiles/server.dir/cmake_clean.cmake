@@ -20,6 +20,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/server.dir/src/Data.cpp.o"
   "CMakeFiles/server.dir/src/Tcp.cpp.o"
   "CMakeFiles/server.dir/src/Communication.cpp.o"
+  "CMakeFiles/server.dir/src/InputValidator.cpp.o"
+  "CMakeFiles/server.dir/src/Job.cpp.o"
+  "CMakeFiles/server.dir/src/ThreadPool.cpp.o"
   "server.pdb"
   "server"
 )

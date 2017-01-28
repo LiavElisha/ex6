@@ -35,11 +35,13 @@ pthread_mutex_t locker = PTHREAD_MUTEX_INITIALIZER;
  * Class name: Menu
  * the class is in charge of the entire input recieving and the entire flow of the program.
  */
-Menu::Menu(TaxiCenter*& t,Socket* socket1) {
+Menu::Menu(TaxiCenter*& t,Socket* socket1){
+    threadPool = new ThreadPool(5);
     taxiCenter =t;
     socket = socket1;
     socket->initialize();
     communication = new Communication();
+
 }
 /*
  * the method gets a string and an array of strings, and returns nothing.
@@ -142,8 +144,14 @@ void Menu::getNewTrip(int id,int startX, int startY,int endX,int  endY, int numO
     // create the arguments of the function ComputeShortestWay
     Data* data = new Data(tripInformation, matrix, taxiCenter);
     // create thread that compute the shortest way
-    pthread_t thread;
-    pthread_create(&thread, NULL, ComputeShortestWay, (void*)data);
+
+
+    Job* computeShortestWay = new Job(ComputeShortestWay, (void*)data);
+    threadPool->addJob(computeShortestWay);
+
+
+    //pthread_t thread;
+    //pthread_create(&thread, NULL, ComputeShortestWay, (void*)data);
 
     //create a new trip.
     taxiCenter->addTrip(tripInformation);
@@ -162,14 +170,16 @@ void* Menu::ComputeShortestWay(void* data1){
     AbstractNode* destination = matrix->getNode(tripInformation->getDestination()); // get the dest.
 
     pthread_mutex_lock(&locker);
-    //finds a path from the drivers current location and where the passanger awaits.;
+    //finds a path from the drivers current location and where the passanger awaits.
     deque<AbstractNode*>* deque1 = new deque<AbstractNode*> (b->theShortestWay(source,destination));
     pthread_mutex_unlock(&locker);
 
 
-    if(!deque1->empty()){
-        deque1->pop_front();
-    }
+//    if(!deque1->empty()){
+//        deque1->pop_front();
+//    }
+
+
     //get the path of the trip.
     tripInformation->setShortestPath(deque1);
     tripInformation->setComputeShortestWayDone();
@@ -343,6 +353,7 @@ void Menu::getInput(){
                 int tariff = atoi((*inputVec)[6].c_str());
                 int timeOfStart = atoi((*inputVec)[7].c_str());
                 getNewTrip( id, startX, startY, endX ,endY,  numOfPassangers, tariff, timeOfStart);
+                inputValidator.emptyTheTripVec();
                 break;
             }
 
@@ -359,6 +370,7 @@ void Menu::getInput(){
                 carMan = (*inputVec)[2];
                 color = (*inputVec)[3];
                 getNewCab(id,taxiType, 0, *carMan.c_str(), *color.c_str());
+                inputValidator.emptyTaxiInputVec();
                 break;
             }
 
@@ -503,4 +515,5 @@ void* Menu::threadFunction(void* data1){
 
 Menu::~Menu() {
     delete communication;
+    delete threadPool;
 };

@@ -77,6 +77,11 @@ AbstractNode*& TripInformation::getNextPointOnRounte(){
 
 void TripInformation::setShortestPath(deque<AbstractNode*>*& path){
     shortestPath= path;
+    if (shortestPath->size() == 0){
+        this->timeOfStart = -1;
+    }
+    length = this->getRouteLength();
+    done = true;
 }
 
 unsigned long TripInformation::getRouteLength(){

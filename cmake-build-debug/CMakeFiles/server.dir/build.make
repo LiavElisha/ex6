@@ -561,6 +561,78 @@ CMakeFiles/server.dir/src/Communication.cpp.o.provides: CMakeFiles/server.dir/sr
 CMakeFiles/server.dir/src/Communication.cpp.o.provides.build: CMakeFiles/server.dir/src/Communication.cpp.o
 
 
+CMakeFiles/server.dir/src/InputValidator.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/InputValidator.cpp.o: ../src/InputValidator.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liav/ClionProjects/ex6/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/server.dir/src/InputValidator.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/src/InputValidator.cpp.o -c /home/liav/ClionProjects/ex6/src/InputValidator.cpp
+
+CMakeFiles/server.dir/src/InputValidator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/src/InputValidator.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liav/ClionProjects/ex6/src/InputValidator.cpp > CMakeFiles/server.dir/src/InputValidator.cpp.i
+
+CMakeFiles/server.dir/src/InputValidator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/InputValidator.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liav/ClionProjects/ex6/src/InputValidator.cpp -o CMakeFiles/server.dir/src/InputValidator.cpp.s
+
+CMakeFiles/server.dir/src/InputValidator.cpp.o.requires:
+
+.PHONY : CMakeFiles/server.dir/src/InputValidator.cpp.o.requires
+
+CMakeFiles/server.dir/src/InputValidator.cpp.o.provides: CMakeFiles/server.dir/src/InputValidator.cpp.o.requires
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/InputValidator.cpp.o.provides.build
+.PHONY : CMakeFiles/server.dir/src/InputValidator.cpp.o.provides
+
+CMakeFiles/server.dir/src/InputValidator.cpp.o.provides.build: CMakeFiles/server.dir/src/InputValidator.cpp.o
+
+
+CMakeFiles/server.dir/src/Job.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/Job.cpp.o: ../src/Job.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liav/ClionProjects/ex6/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/server.dir/src/Job.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/src/Job.cpp.o -c /home/liav/ClionProjects/ex6/src/Job.cpp
+
+CMakeFiles/server.dir/src/Job.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/src/Job.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liav/ClionProjects/ex6/src/Job.cpp > CMakeFiles/server.dir/src/Job.cpp.i
+
+CMakeFiles/server.dir/src/Job.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/Job.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liav/ClionProjects/ex6/src/Job.cpp -o CMakeFiles/server.dir/src/Job.cpp.s
+
+CMakeFiles/server.dir/src/Job.cpp.o.requires:
+
+.PHONY : CMakeFiles/server.dir/src/Job.cpp.o.requires
+
+CMakeFiles/server.dir/src/Job.cpp.o.provides: CMakeFiles/server.dir/src/Job.cpp.o.requires
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/Job.cpp.o.provides.build
+.PHONY : CMakeFiles/server.dir/src/Job.cpp.o.provides
+
+CMakeFiles/server.dir/src/Job.cpp.o.provides.build: CMakeFiles/server.dir/src/Job.cpp.o
+
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: CMakeFiles/server.dir/flags.make
+CMakeFiles/server.dir/src/ThreadPool.cpp.o: ../src/ThreadPool.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/liav/ClionProjects/ex6/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/server.dir/src/ThreadPool.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/src/ThreadPool.cpp.o -c /home/liav/ClionProjects/ex6/src/ThreadPool.cpp
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/src/ThreadPool.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/liav/ClionProjects/ex6/src/ThreadPool.cpp > CMakeFiles/server.dir/src/ThreadPool.cpp.i
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/src/ThreadPool.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/liav/ClionProjects/ex6/src/ThreadPool.cpp -o CMakeFiles/server.dir/src/ThreadPool.cpp.s
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.o.requires:
+
+.PHONY : CMakeFiles/server.dir/src/ThreadPool.cpp.o.requires
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.o.provides: CMakeFiles/server.dir/src/ThreadPool.cpp.o.requires
+	$(MAKE) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/src/ThreadPool.cpp.o.provides.build
+.PHONY : CMakeFiles/server.dir/src/ThreadPool.cpp.o.provides
+
+CMakeFiles/server.dir/src/ThreadPool.cpp.o.provides.build: CMakeFiles/server.dir/src/ThreadPool.cpp.o
+
+
 # Object files for target server
 server_OBJECTS = \
 "CMakeFiles/server.dir/src/Server.cpp.o" \
@@ -583,7 +655,10 @@ server_OBJECTS = \
 "CMakeFiles/server.dir/src/Menu.cpp.o" \
 "CMakeFiles/server.dir/src/Data.cpp.o" \
 "CMakeFiles/server.dir/src/Tcp.cpp.o" \
-"CMakeFiles/server.dir/src/Communication.cpp.o"
+"CMakeFiles/server.dir/src/Communication.cpp.o" \
+"CMakeFiles/server.dir/src/InputValidator.cpp.o" \
+"CMakeFiles/server.dir/src/Job.cpp.o" \
+"CMakeFiles/server.dir/src/ThreadPool.cpp.o"
 
 # External object files for target server
 server_EXTERNAL_OBJECTS =
@@ -609,6 +684,9 @@ server: CMakeFiles/server.dir/src/Menu.cpp.o
 server: CMakeFiles/server.dir/src/Data.cpp.o
 server: CMakeFiles/server.dir/src/Tcp.cpp.o
 server: CMakeFiles/server.dir/src/Communication.cpp.o
+server: CMakeFiles/server.dir/src/InputValidator.cpp.o
+server: CMakeFiles/server.dir/src/Job.cpp.o
+server: CMakeFiles/server.dir/src/ThreadPool.cpp.o
 server: CMakeFiles/server.dir/build.make
 server: /usr/lib/x86_64-linux-gnu/libboost_serialization.so
 server: /usr/lib/x86_64-linux-gnu/libboost_system.so
@@ -621,7 +699,7 @@ server: /usr/lib/x86_64-linux-gnu/libboost_regex.so
 server: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
 server: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liav/ClionProjects/ex6/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/liav/ClionProjects/ex6/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -650,6 +728,9 @@ CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/Menu.cpp.o.requires
 CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/Data.cpp.o.requires
 CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/Tcp.cpp.o.requires
 CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/Communication.cpp.o.requires
+CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/InputValidator.cpp.o.requires
+CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/Job.cpp.o.requires
+CMakeFiles/server.dir/requires: CMakeFiles/server.dir/src/ThreadPool.cpp.o.requires
 
 .PHONY : CMakeFiles/server.dir/requires
 

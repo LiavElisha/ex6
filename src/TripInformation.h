@@ -42,6 +42,9 @@ private:
     deque <AbstractNode*>* shortestPath;
     bool computeShortestWayDone;
 
+    int length;
+    bool done = false;
+
 public:
     // constructor
     TripInformation();
