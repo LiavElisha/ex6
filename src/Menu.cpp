@@ -207,6 +207,16 @@ void Menu::getNewCab(int id,int taxiType, int meters, char carMan,char color){
  * the method deletes all aloocated memory during the program.
  */
 void Menu::shutDownProgram(){
+
+    // stop the pthreds
+    threadPool->terminate();
+    // checks that the threds are finish to work
+    int conditionStop = threadPool->gethowManyFinish();
+    while (conditionStop!=5){
+        conditionStop = threadPool->gethowManyFinish();
+    }
+    delete threadPool;
+
     map<int, Driver *>::iterator it;//matches drivers and cabs.
     // socket->sendData("ShutDown", 0); // send the client a shut down command.
     for (it = taxiCenter->getDriversMap().begin(); it !=
@@ -515,5 +525,4 @@ void* Menu::threadFunction(void* data1){
 
 Menu::~Menu() {
     delete communication;
-    delete threadPool;
 };
