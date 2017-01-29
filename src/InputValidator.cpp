@@ -388,10 +388,14 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
 }
 
 
-
+/*
+ * the method recieves an input as a string trims it and checks if the input
+ * is valid or not if it isn't is prints -1 else it returns a vector with the
+ * propr input as elements inside of it.
+ */
 vector <string>*  InputValidator::validateInputForTaxi(){
 
-    if(!intermediateInputVec.empty()){
+    if(!intermediateInputVec.empty()){///empties the vector prior to the function.
         emptyIntermediateVec();
         emptyTheTripVec();
     }
@@ -400,59 +404,66 @@ vector <string>*  InputValidator::validateInputForTaxi(){
     int max;
     std::cin.clear(); // clears error flags
     std::getline(std::cin, taxiInput);
-    int therAreSpaces = checkIfThereAreSpaces(taxiInput);
+    int therAreSpaces = checkIfThereAreSpaces(taxiInput);///check if there is an extra space in th input
     if(therAreSpaces == -1){
         std::cout << "-1" << endl;
-        emptyIntermediateVec();
+        emptyIntermediateVec();///if so then the input is invalid.
         return 0;
     }
     emptyIntermediateVec();
-    parseInputByDelimiter(taxiInput, ',');
-    if(intermediateInputVec.size()!=4){
+    parseInputByDelimiter(taxiInput, ',');///splits the input into tokens by a comma.
+    if(intermediateInputVec.size()!=4){/// if there are more than 4 elements then the input is invalid.
         std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
     for(int i=0;i<2;i++){
-        if( i == 0){
+        if( i == 0){///the id of the taxi
 
-            min =0;
+            min =0;///it must be non negative.
             max = -1;
-        }else {
-            min =1;
+        }else {///the type of the taxi
+            min =1;///it mus be 1 or 2.
             max =2;
         }
         int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
+        ///check if the number parts of the input are correct.
         if(num == -1){
             std::cout << "-1" << endl;
-            emptyIntermediateVec();
+            emptyIntermediateVec();///else print -1.
             return 0;
         }
     }
     string man = intermediateInputVec[2];
     string color = intermediateInputVec[3];
     if(!(!man.compare("H") || !man.compare("S") || !man.compare("T") || !man.compare("F"))){
+        ///check if the maunfaturer of the taxi is one of these kind.
         std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
     if(!(!color.compare("R") || !color.compare("B") || !color.compare("G") || !color.compare("P")
                                                                         || !color.compare("W"))) {
+        ///check if the color of the taxi is correct.
         std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
-    for(int i=0;i<4;i++){
+    for(int i=0;i<4;i++){///push the elements into the proper vector.
         taxiInputVec.push_back(intermediateInputVec[i]);
     }
     emptyIntermediateVec();
-    return &taxiInputVec;
+    return &taxiInputVec;///return the vector.
 }
 
 
-
+/*
+ * the method receives an input of a new driver, it gets an id of a driver.
+ * the method checks if the id is inside of the drivers map using an iterator.
+ * if it is it returns the id otherwise it returns -1.
+ */
 int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap){
-        if(!intermediateInputVec.empty()) {
+        if(!intermediateInputVec.empty()) {///empties the vector.
             emptyIntermediateVec();
         }
     string id;
@@ -466,7 +477,7 @@ int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap)
         emptyIntermediateVec();
         return -1;
     }
-    driverId = checkIfIsAvalidNumber(id,0,-1);///validate that we have a number as an input that is greate the -1.
+    driverId = checkIfIsAvalidNumber(id,0,-1);///validate that we have a number as an input that is greater then -1.
     if(driverId == -1) {
         std::cout << "-1" << endl;
         emptyIntermediateVec();
@@ -486,15 +497,23 @@ int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap)
     return driverId;///else return the driver id.
 }
 
+
+
+/*
+ * the method receives an input of a new driver, it runs checks that the input is valid.
+ * if the input is invalid it returns null (0) otherwise it returns a vector with the input
+ * as elements of the vector.
+ */
+
 vector <string>*  InputValidator::validateInputForNewDriver(){
-    if(!intermediateInputVec.empty()) {
+    if(!intermediateInputVec.empty()) {///empties the vectors.
         emptyIntermediateVec();
     }
     int min;
     int max;
     string input;
     std::cin.clear(); // clears error flags
-    std::getline(std::cin, input);
+    std::getline(std::cin, input);///getting the input of the driver
     boost::algorithm::trim(input);
     int thereAreSpaces = checkIfThereAreSpaces(input);/// validate that we have no spaces in the input.
     if(thereAreSpaces == -1){
@@ -502,17 +521,17 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
         return 0;
     }
     emptyIntermediateVec();
-    parseInputByDelimiter(input, ',');
-    if(intermediateInputVec.size()!=5){
+    parseInputByDelimiter(input, ',');///split the input by comma
+    if(intermediateInputVec.size()!=5){///check that indeed we have 5 elements.
         emptyIntermediateVec();
         return 0;
     }
     for(int i=0;i<5;i++){
         if(i!=2) {
-            if (i !=1) {
+            if (i !=1) {///verify that the numbers are greater than 0.
                 min = 0;
                 max = -1;
-            } else {
+            } else {/// i=1 that means that the age of the driver must be greater than 0.
                 min = 1;
                 max = -1;
             }
@@ -525,14 +544,15 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
         } else {
             string status = intermediateInputVec[2];
             if(!(!status.compare("S") || !status.compare("M") || !status.compare("D") || !status.compare("W"))){
+                ///checks if the marital status of the driver is one of these.
                 emptyIntermediateVec();
                 return 0;
             }
         }
     }
-    for(int i=0;i<5;i++){
+    for(int i=0;i<5;i++){///push the elements
         driverInputVec.push_back(intermediateInputVec[i]);
     }
-    emptyIntermediateVec();
-    return &driverInputVec;
+    emptyIntermediateVec();///empty the vector.
+    return &driverInputVec;///returns the address of the vector.
 }
