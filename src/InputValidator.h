@@ -41,6 +41,7 @@ public:
     vector <string>*  validateInputForTaxi();
     int validateInputForDriversLocation(map<int,Driver*> driversMap);
     vector <string>*  validateInputForNewDriver();
+    int validateAmountOfDrivers();
 };
 
 

@@ -121,43 +121,8 @@ void Driver::setArriveToDestinationAt(int time){
     arriveToDestinationAt = time;
 }
 
-/*
- * the method makes the driver move one step at a time through the taxi until it gets to the end.
- */
-/*
-void Driver::startDriving(Matrix*& matrix){
 
-    AbstractNode* source = matrix->getNode(myCab->getLocation());
-    AbstractNode* destination = matrix->getNode(currentTrip->getSource());
-    Bfs* b = myCab->getNavigator();
-    //finds a path from the drivers current location and where the passanger awaits.
-    deque<AbstractNode*> deque1 = b->theShortestWay(source,destination);
-    if(!deque1.empty()) {//pops the first element which is the current location.
-        deque1.pop_front();
-    }
-    myCab->setShortestPath(deque1);//sets the path as the current path.
-    while (*(NodePoint*)myCab->getLocation() != *(NodePoint*)currentTrip->getSource()){
-        //drives through the taxi.
-         myCab->addMetersPassed(myCab->moveOneStep());
-    }
-    AbstractNode* source1 = matrix->getNode(currentTrip->getSource());
-    AbstractNode* destination1 = matrix->getNode(currentTrip->getDestination());
-    //finds a path from the current location to the destination - this is the passangers path.
-    deque<AbstractNode*> deque2 = b->theShortestWay(source1,destination1);
-    if(!deque2.empty()) {
-        deque2.pop_front();
-    }
-    myCab->setShortestPath(deque2);//sets the path as the current drive.
-    while(*(NodePoint*)myCab->getLocation()!=*(NodePoint*)currentTrip->getDestination()){
-        //drive to destination.
-        int metersPassed = myCab->moveOneStep();
-        currentTrip->setMetersPassed(currentTrip->getMetersPassed() +metersPassed);
-        myCab->addMetersPassed(metersPassed);
-    }
-    available = true;//the driver is now available for the next trip.
-    delete(currentTrip);
-}
-*/
+
 void Driver::moveOneStep(int clientFlag, int time){
     if(currentTrip == 0){
         return;

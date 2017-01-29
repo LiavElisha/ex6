@@ -457,6 +457,30 @@ vector <string>*  InputValidator::validateInputForTaxi(){
 }
 
 
+int InputValidator::validateAmountOfDrivers() {
+    if(!intermediateInputVec.empty()) {///empties the vector.
+        emptyIntermediateVec();
+    }
+    string amount;
+    int amountOfDrivers;
+    std::cin.clear(); // clears error flags
+    std::getline(std::cin, amount);
+    boost::algorithm::trim(amount);
+    int thereAreSpaces = checkIfThereAreSpaces(amount);/// validate that we have no spaces in the input.
+    if(thereAreSpaces == -1){
+        std::cout << "-1" << endl;
+        emptyIntermediateVec();
+        return -1;
+    }
+    amountOfDrivers = checkIfIsAvalidNumber(amount,1,-1);
+    if(amountOfDrivers == -1){
+        return -1;
+    }
+    return amountOfDrivers;
+
+}
+
+
 /*
  * the method receives an input of a new driver, it gets an id of a driver.
  * the method checks if the id is inside of the drivers map using an iterator.
@@ -471,6 +495,7 @@ int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap)
     int foundDriverFlag=0;
     std::cin.clear(); // clears error flags
     std::getline(std::cin, id);
+    boost::algorithm::trim(id);
     int thereAreSpaces = checkIfThereAreSpaces(id);/// validate that we have no spaces in the input.
     if(thereAreSpaces == -1){
         std::cout << "-1" << endl;
@@ -485,9 +510,10 @@ int InputValidator::validateInputForDriversLocation(map<int,Driver*> driversMap)
     }
     emptyIntermediateVec();
     map<int, Driver *>::iterator it;
-    for (it = driversMap.begin(); it != driversMap.end(); it++){///validate that the driver is in the map by his id.
-        if(it->first == driverId);
-        foundDriverFlag =1;
+    for (it = driversMap.begin(); it != driversMap.end(); it++) {///validate that the driver is in the map by his id.
+        if (it->first == driverId) {
+            foundDriverFlag = 1;
+        }
     }
     if(foundDriverFlag == 0){/// if it isn't return -1.
         std::cout << "-1" << endl;

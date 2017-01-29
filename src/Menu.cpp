@@ -328,11 +328,15 @@ void Menu::getInput(){
           std::cin.clear(); // clears error flags
           std::getline(std::cin, choice1);//gets the choice from the user.
           boost::algorithm::trim(choice1);
-          choice=atoi(choice1.c_str());
+          choice = inputValidator.checkIfIsAvalidNumber(choice1,-1,-1);
         switch (choice) {
             case 1: {// add Driver.
-                int amountOfDrivers;
-                cin>>amountOfDrivers;
+
+
+                int amountOfDrivers = inputValidator.validateAmountOfDrivers();
+                if(amountOfDrivers == -1){
+                    break;
+                }
                 int i = 0;
                 // initialize the array of in communication for communicate betweem the threds
                 communication->InitializeTheArray(amountOfDrivers);
