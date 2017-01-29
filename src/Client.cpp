@@ -25,14 +25,12 @@ using namespace boost::archive;
 
 int main(int argc, char *argv[]){
     InputValidator inputValidator;
-    int portNumber = atoi(argv[2]); // getting the port number from the arguments of the main.
-    Socket* socket = new Tcp(0,portNumber);//creating a new socket -tcp.
     vector <string>* driverInput = inputValidator.validateInputForNewDriver();
      if(driverInput == 0){
-         delete(socket);
          return 0;
      }
-
+    int portNumber = atoi(argv[2]); // getting the port number from the arguments of the main.
+    Socket* socket = new Tcp(0,portNumber);//creating a new socket -tcp.
     socket->initialize();   //initialize the socket.
     char buffer[130000];  // define a buffer for the serialization.
     memset(buffer,0,130000);

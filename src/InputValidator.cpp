@@ -5,6 +5,7 @@
 #include <limits>
 #include "InputValidator.h"
 
+using namespace std;
 
 InputValidator::InputValidator(){
 
@@ -22,6 +23,60 @@ void InputValidator::parseInputByDelimiter(string input, char delimiter){
         intermediateInputVec.push_back(token);
     }
 }
+
+/*
+ * the method gets a string and a range which the string should be between.
+ * first it checks if all of its components are digits and then it checks if the number is in the range given if
+ * one is given.
+ * if it isn't it returns -1 otherwise it returns the num.
+ *
+ */
+double InputValidator::checkIfIsAvalidDouble(string input, double min, double max){
+    string token;
+    istringstream iss(input);
+    while (getline(iss, token, '.')) {
+        doubleVec.push_back(token);
+    }
+
+if(doubleVec.size() >2){
+    emptyIntermediateVec();
+        return -1;
+    }
+    int num = checkIfIsAvalidNumber(doubleVec[0],-1,-1);
+    if(doubleVec.size()>1) {
+        int frac = checkIfIsAvalidNumber(doubleVec[1], -1, -1);
+        if(frac== -1 ){
+            emptyIntermediateVec();
+            return -1;
+        }
+    }
+    if(num  ==  -1){
+        emptyIntermediateVec();
+        return -1;
+    }
+    double tempNum = atof(input.c_str());
+    if(min!= -1) {
+        if (tempNum <= min) {
+            emptyIntermediateVec();
+            return -1;
+        }
+    }
+    if(max!=-1) {
+        if (tempNum > max) {
+            emptyIntermediateVec();
+            return -1;
+        }
+    }
+    while(!doubleVec.empty()){
+        doubleVec.pop_back();
+    }
+    return tempNum;
+}
+
+
+
+
+
 
 
 
@@ -42,7 +97,6 @@ int InputValidator::checkIfIsAvalidNumber(string input,int min, int max){
             return -1;
         }
     }
-
     if(min!=-1){
         if (tempNum < min) {
             return -1;
@@ -71,6 +125,9 @@ void InputValidator::emptyIntermediateVec(){
     while(!intermediateIntInput.empty()){
         intermediateIntInput.pop_back();
     }
+    while(!doubleVec.empty()){
+        doubleVec.pop_back();
+    }
 }
 
 /*
@@ -85,6 +142,7 @@ void InputValidator::validateDimenstionOfMatrix(){
     while(isValid!=1) {
         std::cin.clear(); // clears error flags
         std::getline(std::cin, dimensions);
+        boost::algorithm::trim(dimensions);
         parseInputByDelimiter(dimensions, ' ');
         if(intermediateInputVec.size() == 2) {
             for (int i = 0; i < 2; i++) {
@@ -121,7 +179,6 @@ void InputValidator::validateDimenstionOfMatrix(){
 int InputValidator::checkIfThereAreSpaces(string input){
     parseInputByDelimiter(input,' ');
     if(intermediateInputVec.size()!=1) {
-        std::cout << "-1" << endl;
         return -1;
     }
     else return 0;
@@ -141,9 +198,11 @@ int InputValidator::validateInputForObstacles() {
         int amountOfObstacles;
         std::cin.clear(); // clears error flags
         std::getline(std::cin, numberOfObstacles);
+        boost::algorithm::trim(numberOfObstacles);
         int thereAreSpaces = checkIfThereAreSpaces(numberOfObstacles);
         if(thereAreSpaces == -1){
-            return -1;
+                std::cout << "-1" << endl;
+                return -1;
         }
         amountOfObstacles = checkIfIsAvalidNumber(numberOfObstacles,0,matrixInput[0]*matrixInput[1]);
         if(amountOfObstacles == -1) {
@@ -155,6 +214,7 @@ int InputValidator::validateInputForObstacles() {
     matrixInput.push_back(amountOfObstacles);
     for (int i = 0; i < amountOfObstacles; i++) {
         std::getline(std::cin, obstacle);
+        boost::algorithm::trim(obstacle);
         parseInputByDelimiter(obstacle,' ');
         if (intermediateInputVec.size() != 1) {
             std::cout << "-1" << endl;
@@ -234,7 +294,7 @@ vector<int>*  InputValidator::validateInputForMatrix(){
 }
 
 vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int yDim) {
-    if(!intermediateInputVec.empty()){
+    if (!intermediateInputVec.empty()) {
         emptyIntermediateVec();
         emptyTheTripVec();
     }
@@ -243,8 +303,10 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
     int max;
     std::cin.clear(); // clears error flags
     std::getline(std::cin, input);
+    boost::algorithm::trim(input);
     int therAreSpaces = checkIfThereAreSpaces(input);
-    if(therAreSpaces == -1){
+    if (therAreSpaces == -1) {
+        std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
@@ -256,41 +318,55 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
         return 0;
     }
     for (int i = 0; i < 8; i++) {
-        if (i > 0 && i < 5) {// the points should be in the range of the matrix.
-            if (i % 2 == 0) {
+        if (i > 0 && i < 5) {/// the points should be in the range of the matrix( 1<=i<=4).
+            if (i % 2 == 0) {/// thx value shoud be in the range of the matrix.
                 min = 0;
                 max = xDim - 1;
-            } else {
+            } else {///the y value should be in the range of the matrix.
                 min = 0;
                 max = yDim - 1;
             }
-        }else if (i == 0) {  // the id should be bigger the 0.
+        } else if (i == 0) {/// the id should be bigger then 0.
             min = 0;
             max = -1;
-        } else {//the tariff, the passanger amount and the time should all be bigger than 1.
+        } else {/// the passanger amount and the time should be bigger than 1.
             min = 1;
             max = -1;
         }
-        int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
-        if (num == -1) {
-            emptyIntermediateVec();
-            std::cout << "-1" << endl;
-            return 0;
+        if (i == 6) {///the tariff should be bigger then 0.
+            min = 0;
+            max = -1;
+            double num = checkIfIsAvalidDouble(intermediateInputVec[i], min, max);
+            ///check that the tariff is a valid double and that it is in the proper range
+            if (num == -1) {
+                emptyIntermediateVec();
+                std::cout << "-1" << endl;
+                return 0;
+            }
+        } else {///check that all of the numbers are in the proper range.
+            int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
+            if (num == -1) {
+                emptyIntermediateVec();
+                std::cout << "-1" << endl;
+                return 0;
+            }
         }
     }
 
     if(atoi(intermediateInputVec[1].c_str()) == atoi(intermediateInputVec[3].c_str()) &&
             (atoi(intermediateInputVec[2].c_str()) == atoi(intermediateInputVec[4].c_str()))){
+        ///check that the start point and end point aren't the same.
         emptyIntermediateVec();
         std::cout << "-1" << endl;
         return 0;
     }
-    for(int i=0;i<8;i++){
+    for(int i=0;i<8;i++){///push the input to the correct vector.
         tripInformationInput.push_back(intermediateInputVec[i]);
     }
     emptyIntermediateVec();
-    return &tripInformationInput;
+    return &tripInformationInput;///return the address of the vector as the output.
 }
+
 
 
 vector <string>*  InputValidator::validateInputForTaxi(){
@@ -306,6 +382,7 @@ vector <string>*  InputValidator::validateInputForTaxi(){
     std::getline(std::cin, taxiInput);
     int therAreSpaces = checkIfThereAreSpaces(taxiInput);
     if(therAreSpaces == -1){
+        std::cout << "-1" << endl;
         emptyIntermediateVec();
         return 0;
     }
@@ -398,6 +475,7 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
     string input;
     std::cin.clear(); // clears error flags
     std::getline(std::cin, input);
+    boost::algorithm::trim(input);
     int thereAreSpaces = checkIfThereAreSpaces(input);/// validate that we have no spaces in the input.
     if(thereAreSpaces == -1){
         emptyIntermediateVec();

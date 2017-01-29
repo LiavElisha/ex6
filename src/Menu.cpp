@@ -327,8 +327,8 @@ void Menu::getInput(){
       do {
           std::cin.clear(); // clears error flags
           std::getline(std::cin, choice1);//gets the choice from the user.
+          boost::algorithm::trim(choice1);
           choice=atoi(choice1.c_str());
-
         switch (choice) {
             case 1: {// add Driver.
                 int amountOfDrivers;
@@ -360,7 +360,7 @@ void Menu::getInput(){
                 int endX = atoi((*inputVec)[3].c_str());
                 int endY = atoi((*inputVec)[4].c_str());
                 int numOfPassangers = atoi((*inputVec)[5].c_str());
-                int tariff = atoi((*inputVec)[6].c_str());
+                double tariff = atof((*inputVec)[6].c_str());
                 int timeOfStart = atoi((*inputVec)[7].c_str());
                 getNewTrip( id, startX, startY, endX ,endY,  numOfPassangers, tariff, timeOfStart);
                 inputValidator.emptyTheTripVec();
@@ -417,7 +417,7 @@ void Menu::getInput(){
                 break;
             }
             default: {
-                cout << "wrong input"<<endl;
+                cout << "-1"<<endl;
                 break;
             }
         }

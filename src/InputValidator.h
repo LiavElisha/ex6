@@ -23,8 +23,9 @@ private:
     vector <string> tripInformationInput;
     vector<string> taxiInputVec;
     vector<string>driverInputVec;
-
+    vector<string>doubleVec;
 public:
+    double checkIfIsAvalidDouble(string input, double min, double max);
     int checkIfIsAvalidNumber(string input,int min, int max);
     void parseInputByDelimiter(string input, char delimiter);
     void emptyIntermediateVec();
