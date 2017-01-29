@@ -4,6 +4,8 @@
 
 #include <limits>
 #include "InputValidator.h"
+#include "Driver.h"
+#include <map>
 
 using namespace std;
 
@@ -18,9 +20,9 @@ InputValidator::InputValidator(){
  */
 void InputValidator::parseInputByDelimiter(string input, char delimiter){
     string token;
-    istringstream iss(input);
+    istringstream iss(input);///cast to istring stream.
     while (getline(iss, token, delimiter)) {
-        intermediateInputVec.push_back(token);
+        intermediateInputVec.push_back(token);///split it into tokens.
     }
 }
 
@@ -32,17 +34,27 @@ void InputValidator::parseInputByDelimiter(string input, char delimiter){
  *
  */
 double InputValidator::checkIfIsAvalidDouble(string input, double min, double max){
-    string token;
-    istringstream iss(input);
-    while (getline(iss, token, '.')) {
-        doubleVec.push_back(token);
+    int thereIsAMaximumValFlag =0;
+    int thereIsAMinimumValFlag =0;
+    if(min != -1){
+        thereIsAMinimumValFlag = 1;
+    }
+    if(max != -1){
+        thereIsAMaximumValFlag=1;
     }
 
-if(doubleVec.size() >2){
-    emptyIntermediateVec();
+
+    string token;
+    istringstream iss(input);
+    while (getline(iss, token, '.')) {///split into tokens by spaces.
+        doubleVec.push_back(token);///push to an input vector.
+    }
+
+if(doubleVec.size() >2){///we have more than 2 parameters.
+    emptyIntermediateVec();///the input is incorrect so we make the vector empty.
         return -1;
     }
-    int num = checkIfIsAvalidNumber(doubleVec[0],-1,-1);
+    int num = checkIfIsAvalidNumber(doubleVec[0],-1,-1);///check that each of the parts is a valid number.
     if(doubleVec.size()>1) {
         int frac = checkIfIsAvalidNumber(doubleVec[1], -1, -1);
         if(frac== -1 ){
@@ -53,31 +65,25 @@ if(doubleVec.size() >2){
     if(num  ==  -1){
         emptyIntermediateVec();
         return -1;
-    }
-    double tempNum = atof(input.c_str());
-    if(min!= -1) {
-        if (tempNum <= min) {
+    }///if it isn't than the input is invalid.
+    double tempNum = atof(input.c_str());///cast the string into a double.
+    if(thereIsAMinimumValFlag) {/// check if we have a minimum value to consider.
+        if (tempNum <= min) {///if there is and the value is smaller than the input is invalid.
             emptyIntermediateVec();
             return -1;
         }
     }
-    if(max!=-1) {
+    if(thereIsAMaximumValFlag) {///check if there is a maximum value to take in considiration.
         if (tempNum > max) {
             emptyIntermediateVec();
-            return -1;
+            return -1;///if there is and the value is bigger thean the maximum then the input is invalid.
         }
     }
-    while(!doubleVec.empty()){
+    while(!doubleVec.empty()){///else empty the input vector.
         doubleVec.pop_back();
     }
-    return tempNum;
+    return tempNum;///return the value casted into double.
 }
-
-
-
-
-
-
 
 
 /*
@@ -88,21 +94,33 @@ if(doubleVec.size() >2){
  *
  */
 int InputValidator::checkIfIsAvalidNumber(string input,int min, int max){
-    unsigned long length = input.size();
+
+    int thereIsAMaximumValFlag =0;
+    int thereIsAMinimumValFlag =0;
+    if(min != -1){///check if there is a minimum value we need to take in considiration.
+        thereIsAMinimumValFlag = 1;
+    }
+    if(max != -1){///check if there is a maximum value we need to take in considiration.
+        thereIsAMaximumValFlag=1;
+    }
+
+
+    unsigned long length = input.size();///check the length of the string.
     int tempNum= 0;
-    for (int i=0;i<length;i++){
+    for (int i=0;i<length;i++){///go through all the elements of the string char by char.
+        ///and if the current char is a digit take it, multiply the number by 10 and add the element.
         if(isdigit(input[i])){
             tempNum = 10*tempNum+(input[i]-'0');
         } else{
-            return -1;
+            return -1;///else return invalid input.
         }
     }
-    if(min!=-1){
+    if(thereIsAMinimumValFlag){///check if we need to take in considiration a minimum value.
         if (tempNum < min) {
             return -1;
         }
     }
-    if(max!= -1){
+    if(thereIsAMaximumValFlag){///check if we need to take in considiration a maximum value.
         if (tempNum > max) {
             return -1;
         }
@@ -110,9 +128,7 @@ int InputValidator::checkIfIsAvalidNumber(string input,int min, int max){
     return tempNum;
 }
 
-/*
- *
- */
+
 
 /*
  * the method empties the vectors of string in case that the input was incorrect
@@ -139,23 +155,24 @@ void InputValidator::validateDimenstionOfMatrix(){
     int isValid = 0;
     string dimensions;
     int validNum;
-    while(isValid!=1) {
+    while(isValid!=1) {///run until we get a correct input.
         std::cin.clear(); // clears error flags
         std::getline(std::cin, dimensions);
-        boost::algorithm::trim(dimensions);
-        parseInputByDelimiter(dimensions, ' ');
-        if(intermediateInputVec.size() == 2) {
+        boost::algorithm::trim(dimensions);///trim the string from white spaces.
+        parseInputByDelimiter(dimensions, ' ');///split into tokens by spaces.
+        if(intermediateInputVec.size() == 2) {///check if the size is 2 or not.
             for (int i = 0; i < 2; i++) {
                 validNum = checkIfIsAvalidNumber(intermediateInputVec[i], 1, 1000);
-                if (validNum == -1) {
+                ///the maximum valiue is 1000 and the minimum is 1.
+                if (validNum == -1) {///if we got an unvalid input then start over.
                     emptyIntermediateVec();
                     std::cout << "-1" << endl;
                     break;
-                } else {
+                } else {///else push the proper elements to the correct vector.
                     intermediateIntInput.push_back(validNum);
                 }
             }
-            if (intermediateIntInput.size() == 2) {
+            if (intermediateIntInput.size() == 2) {///double check that the input was fine.
                 isValid = 1;
             }
         }else {
@@ -166,7 +183,7 @@ void InputValidator::validateDimenstionOfMatrix(){
     }
     matrixInput.push_back(intermediateIntInput[0]);
     matrixInput.push_back(intermediateIntInput[1]);
-    emptyIntermediateVec();
+    emptyIntermediateVec();///empty all of the intermediate vectors used for computation.
 }
 
 
@@ -197,43 +214,46 @@ int InputValidator::validateInputForObstacles() {
         string  numberOfObstacles;
         int amountOfObstacles;
         std::cin.clear(); // clears error flags
-        std::getline(std::cin, numberOfObstacles);
-        boost::algorithm::trim(numberOfObstacles);
-        int thereAreSpaces = checkIfThereAreSpaces(numberOfObstacles);
+        std::getline(std::cin, numberOfObstacles);///get the input
+        boost::algorithm::trim(numberOfObstacles);///trim the input.
+        int thereAreSpaces = checkIfThereAreSpaces(numberOfObstacles);///check if there is an extra space.
         if(thereAreSpaces == -1){
                 std::cout << "-1" << endl;
                 return -1;
         }
-        amountOfObstacles = checkIfIsAvalidNumber(numberOfObstacles,0,matrixInput[0]*matrixInput[1]);
+    ///check if it is a valid amount.
+        amountOfObstacles = checkIfIsAvalidNumber(numberOfObstacles,0,-1);
         if(amountOfObstacles == -1) {
             std::cout << "-1" << endl;
             return -1;
         }
     emptyIntermediateVec();
     std::cin.clear(); // clears error flags
-    matrixInput.push_back(amountOfObstacles);
-    for (int i = 0; i < amountOfObstacles; i++) {
-        std::getline(std::cin, obstacle);
-        boost::algorithm::trim(obstacle);
-        parseInputByDelimiter(obstacle,' ');
-        if (intermediateInputVec.size() != 1) {
+    matrixInput.push_back(amountOfObstacles);///push the input which was valid so far.
+    for (int i = 0; i < amountOfObstacles; i++) {///run as many times as the amount of obstacles.
+        std::getline(std::cin, obstacle);///get the obstacle.
+        boost::algorithm::trim(obstacle);///trim if from spaces.
+        parseInputByDelimiter(obstacle,' ');///split it by spaces.
+        if (intermediateInputVec.size() != 1) {///if there was an extra spaces the input is invalid.
             std::cout << "-1" << endl;
             return -1;
         } else {
             obstacle = intermediateInputVec.front();
             emptyIntermediateVec();
-            parseInputByDelimiter(obstacle,',');
+            parseInputByDelimiter(obstacle,',');///else split it by comma.
             if (intermediateInputVec.size() != 2) {
+                ///if the size of the vector is more than 2 then the input is invalid
                 std::cout << "-1" << endl;
                 return -1;
             } else {
+                ///check that each component is valid
                 int xVal = checkIfIsAvalidNumber(intermediateInputVec[0],0,matrixInput[1]-1);
                 int yVal = checkIfIsAvalidNumber(intermediateInputVec[1],0,matrixInput[0]-1);
                 if ((xVal == -1 || yVal == -1)|| (xVal ==0 && yVal == 0)) {
                     std::cout << "-1" << endl;
                     return -1;
                 }else {
-                    matrixInput.push_back(xVal);
+                    matrixInput.push_back(xVal);///push it to the vecor.
                     matrixInput.push_back(yVal);
                     emptyIntermediateVec();
                 }
@@ -489,7 +509,7 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
     }
     for(int i=0;i<5;i++){
         if(i!=2) {
-            if (i == 0 || i==4) {
+            if (i !=1) {
                 min = 0;
                 max = -1;
             } else {
