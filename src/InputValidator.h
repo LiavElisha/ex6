@@ -42,6 +42,8 @@ public:
     int validateInputForDriversLocation(map<int,Driver*> driversMap);
     vector <string>*  validateInputForNewDriver();
     int validateAmountOfDrivers();
+    int validateIdOfTrip(vector<TripInformation*> tripDeque, int id);
+    int validateIdOfTaxi(vector<AbstractCab*> cabVector, int id);
 };
 
 

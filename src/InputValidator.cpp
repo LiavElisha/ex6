@@ -562,7 +562,6 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
             }
             int num = checkIfIsAvalidNumber(intermediateInputVec[i], min, max);
             if (num == -1) {
-                std::cout << "-1" << endl;
                 emptyIntermediateVec();
                 return 0;
             }
@@ -580,4 +579,39 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
     }
     emptyIntermediateVec();///empty the vector.
     return &driverInputVec;///returns the address of the vector.
+}
+
+int InputValidator::validateIdOfTrip(vector<TripInformation*> tripDeque, int id){
+    int wasFound=0;
+    for(int i=0;i<tripDeque.size();i++){
+                if(id==tripDeque[i]->getRideId()){
+                    wasFound = 1;
+                    break;
+                }
+    }
+    if(wasFound == 1){
+        std::cout << "-1" << endl;
+        return -1;
+    }
+    return id;
+
+}
+
+
+
+int InputValidator::validateIdOfTaxi(vector<AbstractCab*> cabVector, int id){
+    int wasFound=0;
+    for(int i=0;i<cabVector.size();i++){
+        if(id==cabVector[i]->getCabId()){
+            wasFound = 1;
+            break;
+        }
+    }
+    if(wasFound == 1){
+        std::cout << "-1" << endl;
+        return -1;
+    }
+    return id;
+
+
 }

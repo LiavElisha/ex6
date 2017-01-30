@@ -359,6 +359,11 @@ void Menu::getInput(){
                     break;
                 }
                 int id = atoi((*inputVec)[0].c_str());
+                int flag = inputValidator.validateIdOfTrip(taxiCenter->getTripDeque(),id);
+                if(flag == -1){
+                    inputValidator.emptyTheTripVec();
+                    break;
+                }
                 int startX = atoi((*inputVec)[1].c_str());
                 int startY = atoi((*inputVec)[2].c_str());
                 int endX = atoi((*inputVec)[3].c_str());
@@ -371,7 +376,6 @@ void Menu::getInput(){
                 break;
             }
 
-
             case 3: {// add Cab.
                 vector <string>* inputVec = inputValidator.validateInputForTaxi();
                 if(inputVec == 0){
@@ -380,6 +384,11 @@ void Menu::getInput(){
                 int id, taxiType;
                 string carMan, color;
                 id = atoi((*inputVec)[0].c_str());
+                int flag = inputValidator.validateIdOfTaxi(taxiCenter->getCabVector(),id);
+                if(flag == -1){
+                    inputValidator.emptyTaxiInputVec();
+                    break;
+                }
                 taxiType = atoi((*inputVec)[1].c_str());
                 carMan = (*inputVec)[2];
                 color = (*inputVec)[3];
