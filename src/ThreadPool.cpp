@@ -20,7 +20,7 @@ static void *startJobs(void *arg) {
 ThreadPool::ThreadPool(int threads_num1){
     threads_num = threads_num1;
     stop = false;
-
+    howManyFinish=0;
     // TODO Auto-generated constructor stub
     threads = new pthread_t[threads_num];
 
