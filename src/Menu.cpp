@@ -370,7 +370,15 @@ void Menu::getInput(){
                 int endY = atoi((*inputVec)[4].c_str());
                 int numOfPassangers = atoi((*inputVec)[5].c_str());
                 double tariff = atof((*inputVec)[6].c_str());
-                int timeOfStart = atoi((*inputVec)[7].c_str());
+                int timeOfStart = inputValidator.checkIfIsAvalidNumber((*inputVec)[7],taxiCenter->getTime()+1,-1);
+             if(timeOfStart == -1){
+                 cout << "-1"<<endl;
+                 inputValidator.emptyTheTripVec();
+                 break;
+             }
+
+
+
                 getNewTrip( id, startX, startY, endX ,endY,  numOfPassangers, tariff, timeOfStart);
                 inputValidator.emptyTheTripVec();
                 break;
