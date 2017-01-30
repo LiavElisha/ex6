@@ -282,6 +282,9 @@ void InputValidator::emptyTheTripVec() {
     }
 }
 
+/*
+ * the method empties the vector.
+ */
 void InputValidator::emptyTaxiInputVec() {
     while(!taxiInputVec.empty()){
         taxiInputVec.pop_back();
@@ -397,7 +400,7 @@ vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int 
 /*
  * the method recieves an input as a string trims it and checks if the input
  * is valid or not if it isn't is prints -1 else it returns a vector with the
- * propr input as elements inside of it.
+ * proper input as elements inside of it.
  */
 vector <string>*  InputValidator::validateInputForTaxi(){
 

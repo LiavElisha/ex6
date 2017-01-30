@@ -376,9 +376,6 @@ void Menu::getInput(){
                  inputValidator.emptyTheTripVec();
                  break;
              }
-
-
-
                 getNewTrip( id, startX, startY, endX ,endY,  numOfPassangers, tariff, timeOfStart);
                 inputValidator.emptyTheTripVec();
                 break;
