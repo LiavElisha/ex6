@@ -313,6 +313,13 @@ vector<int>*  InputValidator::validateInputForMatrix(){
     }
 }
 
+
+/*
+ * the method gets as parameters the dimension of the matrix.
+ * then it recieves an input from the user through the console and checks if the input was correct or not.
+ * if the input is valid it returns a vector with its element as the input. else it return null.
+ */
+
 vector <string>*  InputValidator::validateInputForTripInformation(int xDim, int yDim) {
     if (!intermediateInputVec.empty()) {
         emptyIntermediateVec();
@@ -455,7 +462,10 @@ vector <string>*  InputValidator::validateInputForTaxi(){
     return &taxiInputVec;///return the vector.
 }
 
-
+/*
+ * the method receives a number and checks if it is a valid number if it is it returns it
+ * otherwise it returns -1.
+ */
 int InputValidator::validateAmountOfDrivers() {
     if(!intermediateInputVec.empty()) {///empties the vector.
         emptyIntermediateVec();
@@ -581,6 +591,12 @@ vector <string>*  InputValidator::validateInputForNewDriver(){
     return &driverInputVec;///returns the address of the vector.
 }
 
+
+/*
+ * the method gets as paramteres the trip vector and the id of the current trip.
+ * then it checks if an other trip has the same id, if so the input is invalid and we return -1
+ * after printing -1, otherwise we return the id of the trip/
+ */
 int InputValidator::validateIdOfTrip(vector<TripInformation*> tripDeque, int id){
     int wasFound=0;
     for(int i=0;i<tripDeque.size();i++){
@@ -598,7 +614,11 @@ int InputValidator::validateIdOfTrip(vector<TripInformation*> tripDeque, int id)
 }
 
 
-
+/*
+ * the method gets a vector of cabs and an id, then the method cheks if another cab in the vector,
+ * has the same id, if so we print -1 and return -1.
+ * otherwise we return the id.
+ */
 int InputValidator::validateIdOfTaxi(vector<AbstractCab*> cabVector, int id){
     int wasFound=0;
     for(int i=0;i<cabVector.size();i++){
