@@ -43,7 +43,7 @@ private:
     bool computeShortestWayDone;
 
     int length;
-    bool done = false;
+    bool done;
 
 public:
     // constructor
